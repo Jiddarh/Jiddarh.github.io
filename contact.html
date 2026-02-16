@@ -2,32 +2,239 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Jiddarh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; max-width: 700px; margin: 80px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-    nav { text-align: center; margin-bottom: 40px; }
-    nav a { margin: 0 15px; text-decoration: none; color: #222; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    h1 { font-size: 2.2rem; margin-bottom: 10px; }
-    p { font-size: 1.05rem; margin-bottom: 15px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .contact-hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      border: 5px solid white;
+      margin-bottom: 2rem;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-hero p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 3rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #007bff, #28a745, #ffc107, #6f42c1);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .contact-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .email-icon { color: #ea4335; }
+    .linkedin-icon { color: #0077b5; }
+    .github-icon { color: #333; }
+
+    .contact-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    .contact-link {
+      font-size: 1.1rem;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border: 2px solid #007bff;
+      border-radius: 50px;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      background: #007bff;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      margin: 5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-hero {
+        padding: 3rem 1rem;
+        min-height: 60vh;
+      }
+
+      .profile-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Navigation -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="work.html">Work</a>
-    <a href="contact.html">Contact</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- Contact Content -->
-  <h1>Contact Me</h1>
+  <!-- Contact Hero -->
+  <section class="contact-hero">
+    <img src="jiddarh.jpg" alt="Hauwa Kudu Mohammed" class="profile-img">
+    <h1>Get In Touch</h1>
+    <p>Let's discuss your API docs, AI guides, or technical writing needs.</p>
+  </section>
 
-  <p>Email: <a href="mailto:hauwakudum.06@gmail.com">hauwakudum.06@gmail.com</a></p>
-  <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-  <p>GitHub: <a href="https://github.com/Jiddarh" target="_blank">github.com/Jiddarh</a></p>
+  <!-- Contact Cards -->
+  <div class="contact-grid">
+    <div class="contact-card">
+      <i class="fas fa-envelope contact-icon email-icon"></i>
+      <h3>Email Me</h3>
+      <p>Fastest way to discuss your project requirements</p>
+      <a href="mailto:hauwakudum.06@gmail.com" class="contact-link">Send Message</a>
+    </div>
+
+    <div class="contact-card">
+      <i class="fab fa-linkedin contact-icon linkedin-icon"></i>
+      <h3>LinkedIn</h3>
+      <p>Connect for opportunities and technical discussions</p>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">View Profile</a>
+    </div>
+
+    <div class="contact-card">
+      <i class="fab fa-github contact-icon github-icon"></i>
+      <h3>GitHub</h3>
+      <p>Review my documentation samples and projects</p>
+      <a href="https://github.com/Jiddarh" target="_blank" class="contact-link">Visit GitHub</a>
+    </div>
+  </div>
 
 </body>
-      </html>
+</html>
