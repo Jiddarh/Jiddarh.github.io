@@ -2,38 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Work | Jiddarh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work | Jiddarh - API Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; max-width: 700px; margin: 80px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-    nav { text-align: center; margin-bottom: 40px; }
-    nav a { margin: 0 15px; text-decoration: none; color: #222; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    h1 { font-size: 2.2rem; margin-bottom: 10px; }
-    h2 { font-size: 1.4rem; margin-top: 20px; }
-    p { font-size: 1.05rem; margin-bottom: 15px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', Arial, Helvetica, sans-serif; 
+      line-height: 1.6; color: #222; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    
+    nav {
+      position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+      padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); z-index: 100;
+    }
+    nav ul { 
+      display: flex; justify-content: center; list-style: none; gap: 2rem; 
+    }
+    nav a { 
+      text-decoration: none; color: #222; font-weight: 600; font-size: 1.1rem; 
+      transition: color 0.3s; 
+    }
+    nav a:hover { color: #007bff; }
+
+    .hero {
+      min-height: 70vh; 
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 4rem 2rem; text-align: center; max-width: 1000px; margin: 0 auto; 
+      gap: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
+      background: linear-gradient(135deg, #007bff, #0056b3); 
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; }
+
+    .projects-section { 
+      max-width: 1200px; margin: 5rem auto; padding: 0 2rem; 
+    }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+      gap: 3rem; margin-top: 3rem;
+    }
+    
+    .project-card {
+      background: white; border-radius: 20px; overflow: hidden; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: all 0.3s;
+      border-top: 4px solid #007bff;
+    }
+    .project-card:hover { 
+      transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); 
+    }
+    
+    .project-header {
+      padding: 2.5rem; background: linear-gradient(135deg, #007bff, #0056b3); 
+      color: white; text-align: center;
+    }
+    .project-header h2 { font-size: 1.8rem; margin: 0; }
+    
+    .project-content { padding: 2.5rem; }
+    .project-content h3 { color: #007bff; margin-bottom: 1rem; font-size: 1.4rem; }
+    
+    .repo-link {
+      display: inline-block; background: #007bff; color: white; 
+      padding: 1rem 2rem; text-decoration: none; border-radius: 50px; 
+      font-weight: 600; margin-top: 1.5rem; transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(0,123,255,0.3);
+    }
+    .repo-link:hover { 
+      background: #0056b3; transform: translateY(-3px); 
+      box-shadow: 0 15px 40px rgba(0,123,255,0.4);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #007bff, #0056b3); color: white; 
+      text-align: center; padding: 6rem 2rem; margin: 6rem 0;
+    }
+    .cta-button {
+      background: white; color: #007bff; padding: 1.2rem 3rem; 
+      font-size: 1.2rem; font-weight: 600; text-decoration: none;
+      border-radius: 50px; display: inline-block; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+    .cta-button:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+
+    @media (max-width: 768px) {
+      nav ul { flex-direction: column; gap: 1rem; }
+      .hero { padding: 3rem 1rem; min-height: 60vh; }
+      .projects-section { padding: 0 1rem; margin: 3rem auto; }
+      .projects-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
   </style>
 </head>
 <body>
-
   <!-- Navigation -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="work.html">Work</a>
-    <a href="contact.html">Contact</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- Work Content -->
-  <h1>My Work</h1>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>My Work</h1>
+    <p>Real API documentation projects showcasing structured, developer-friendly technical writing</p>
+  </section>
 
-  <h2>Project 1 – API Documentation</h2>
-  <p>Created structured API documentation for a machine learning platform, helping developers onboard faster and integrate with confidence.</p>
+  <!-- Projects -->
+  <section class="projects-section">
+    <div class="projects-grid">
+      
+      <!-- AI Text Classification API -->
+      <div class="project-card">
+        <div class="project-header">
+          <h2><i style="margin-right: 0.5rem;">🤖</i>AI Text Classification API</h2>
+          <p style="opacity: 0.9; margin-top: 0.5rem;">Sentiment Analysis Documentation</p>
+        </div>
+        <div class="project-content">
+          <h3>Complete Production-Ready API Documentation</h3>
+          <p>
+            Created comprehensive documentation for an AI-powered text classification API. 
+            Includes authentication, endpoints, error handling, rate limits, and cURL examples.
+          </p>
+          <ul style="margin: 2rem 0; padding-left: 1.5rem; font-size: 1.05rem;">
+            <li>✅ Full REST API specification</li>
+            <li>✅ Request/Response JSON examples</li>
+            <li>✅ Error codes & status handling</li>
+            <li>✅ Rate limiting documentation</li>
+            <li>✅ Professional README.md structure</li>
+          </ul>
+          <a href="https://github.com/Jiddarh/ai-text-classification-api-docs" class="repo-link" target="_blank">
+            View Live Documentation → 
+          </a>
+        </div>
+      </div>
 
-  <h2>Project 2 – Data Product Guides</h2>
-  <p>Developed user-friendly guides for a data analytics platform, turning complex workflows into step-by-step tutorials.</p>
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-header" style="background: linear-gradient(135deg, #28a745, #20c997);">
+          <h2><i style="margin-right: 0.5rem;">📈</i>Data Product Guides</h2>
+          <p style="opacity: 0.9; margin-top: 0.5rem;">Analytics Platform Documentation</p>
+        </div>
+        <div class="project-content">
+          <h3>User-Friendly Data Analytics Guides</h3>
+          <p>
+            Developed step-by-step tutorials for data analytics platform, turning complex 
+            workflows into actionable guides for non-technical users.
+          </p>
+          <p><strong>Skills:</strong> User manuals, screenshots, workflow diagrams, troubleshooting</p>
+          <a href="contact.html" class="repo-link" style="background: #28a745;">
+            Discuss Similar Projects →
+          </a>
+        </div>
+      </div>
 
-  <h2>Project 3 – AI Technical Writing</h2>
-  <p>Produced documentation for an AI product, covering model behavior, edge cases, and examples to reduce support requests.</p>
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-header" style="background: linear-gradient(135deg, #ffc107, #e68900);">
+          <h2><i style="margin-right: 0.5rem;">⚙️</i>AI Technical Writing</h2>
+          <p style="opacity: 0.9; margin-top: 0.5rem;">Model Documentation & Edge Cases</p>
+        </div>
+        <div class="project-content">
+          <h3>AI Model Behavior & Integration Docs</h3>
+          <p>
+            Documented AI model behavior, input requirements, edge cases, and integration 
+            examples to help developers implement with confidence.
+          </p>
+          <p><strong>Focus:</strong> Model parameters, validation rules, performance metrics</p>
+          <a href="contact.html" class="repo-link" style="background: #ffc107; color: #222;">
+            See More AI Docs →
+          </a>
+        </div>
+      </div>
 
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h1 style="font-size: 3rem; margin-bottom: 1.5rem;">Need API Documentation?</h1>
+    <p style="font-size: 1.3rem; max-width: 600px; margin: 0 auto 3rem;">
+      I create clear, developer-friendly docs for AI, fintech, and data APIs
+    </p>
+    <a href="contact.html" class="cta-button">Get Quote</a>
+  </section>
 </body>
-</html>
+  </htm
