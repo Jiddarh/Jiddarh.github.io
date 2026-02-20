@@ -5,7 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Jiddarh</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- DARK MODE SCRIPT -->
+  <script>
+    // Auto-detect system dark mode + listen for changes
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if (darkModeMediaQuery.matches) {
+      document.documentElement.classList.add('dark');
+    }
+    darkModeMediaQuery.addEventListener('change', e => {
+      document.documentElement.classList.toggle('dark', e.matches);
+    });
+  </script>
+  
   <style>
+    /* DARK MODE CSS VARIABLES */
+    :root {
+      --bg-primary: #f8f9fa;
+      --bg-secondary: white;
+      --text-primary: #222;
+      --text-secondary: #666;
+      --card-bg: white;
+      --card-shadow: rgba(0,0,0,0.1);
+      --border-color: #e9ecef;
+      --nav-bg: rgba(255,255,255,0.95);
+      --gradient-blue: linear-gradient(135deg, #007bff, #0056b3);
+      --timeline-line: linear-gradient(135deg, #007bff, #0056b3);
+    }
+
+    .dark {
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --text-primary: #e8e8e8;
+      --text-secondary: #b8b8b8;
+      --card-bg: #1e1e2e;
+      --card-shadow: rgba(0,0,0,0.4);
+      --border-color: #40404f;
+      --nav-bg: rgba(26,26,46,0.95);
+      --timeline-line: linear-gradient(135deg, #4dabf7, #3d8bfd);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,18 +54,18 @@
     body {
       font-family: 'Inter', Arial, Helvetica, sans-serif;
       line-height: 1.6;
-      color: #222;
-      background-color: #f8f9fa;
+      color: var(--text-primary);
+      background: var(--bg-primary);
       overflow-x: hidden;
     }
 
     nav {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.95);
+      background: var(--nav-bg);
       backdrop-filter: blur(10px);
       padding: 1rem 2rem;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 20px var(--card-shadow);
       z-index: 100;
     }
 
@@ -39,7 +78,7 @@
 
     nav a {
       text-decoration: none;
-      color: #222;
+      color: var(--text-primary);
       font-weight: 600;
       font-size: 1.1rem;
       transition: color 0.3s;
@@ -67,15 +106,15 @@
       height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      border: 5px solid white;
+      box-shadow: 0 15px 40px var(--card-shadow);
+      border: 5px solid var(--card-bg);
     }
 
     .about-hero h1 {
       font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 700;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #007bff, #0056b3);
+      background: var(--gradient-blue);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -92,6 +131,7 @@
       margin-bottom: 2rem;
       opacity: 0.9;
       padding: 0 1rem;
+      color: var(--text-primary);
     }
 
     .skills-timeline {
@@ -104,16 +144,18 @@
     }
 
     .timeline-item {
-      background: white;
+      background: var(--card-bg);
       padding: 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px var(--card-shadow);
       position: relative;
-      transition: transform 0.3s;
+      transition: all 0.3s;
+      border: 1px solid var(--border-color);
     }
 
     .timeline-item:hover {
       transform: translateY(-5px);
+      box-shadow: 0 20px 40px var(--card-shadow);
     }
 
     .timeline-item::before {
@@ -122,8 +164,8 @@
       left: 0;
       top: 2.5rem;
       width: 4px;
-      height: 100%;
-      background: linear-gradient(135deg, #007bff, #0056b3);
+      height: calc(100% - 5rem);
+      background: var(--timeline-line);
     }
 
     .timeline-item h3 {
@@ -132,12 +174,25 @@
       color: #007bff;
     }
 
+    .timeline-item p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
     .cta-section {
-      background: linear-gradient(135deg, #007bff, #0056b3);
+      background: var(--gradient-blue);
       color: white;
       text-align: center;
       padding: 4rem 2rem;
       margin: 5rem 0;
+    }
+
+    .cta-section h2, .cta-section p {
+      color: white;
+    }
+
+    .cta-section p {
+      opacity: 0.9;
     }
 
     .cta-button {
@@ -178,6 +233,11 @@
       .about-content p {
         font-size: 1.1rem;
         padding: 0;
+      }
+
+      .skills-timeline {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
     }
   </style>
