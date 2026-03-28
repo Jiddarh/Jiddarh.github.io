@@ -4,236 +4,470 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Jiddarh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg-primary: #f5f4f0;
+      --bg-secondary: #eceae3;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --accent: #1a56db;
+      --accent-dark: #1040b0;
+      --accent-light: #e8f0fe;
+      --border: #ddd8ce;
+      --nav-bg: rgba(245,244,240,0.95);
+      --shadow: rgba(0,0,0,0.08);
+      --shadow-strong: rgba(0,0,0,0.15);
     }
 
+    .dark {
+      --bg-primary: #0e0e0e;
+      --bg-secondary: #161616;
+      --bg-card: #1c1c1c;
+      --text-primary: #f0ede6;
+      --text-secondary: #999;
+      --accent: #4d7fff;
+      --accent-dark: #3a6aee;
+      --accent-light: #1a2540;
+      --border: #2a2a2a;
+      --nav-bg: rgba(14,14,14,0.95);
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-strong: rgba(0,0,0,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Inter', Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background-color: #f8f9fa;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     nav {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-      z-index: 100;
-    }
-
-    nav ul {
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      z-index: 1000;
       display: flex;
-      justify-content: center;
-      list-style: none;
-      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
     }
 
-    nav a {
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--accent);
       text-decoration: none;
-      color: #222;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s;
+      letter-spacing: -0.5px;
     }
 
-    nav a:hover {
-      color: #007bff;
-    }
-
-    .contact-hero {
-      min-height: 70vh;
+    .nav-links {
       display: flex;
-      flex-direction: column;
+      list-style: none;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dark-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4rem 2rem;
-      text-align: center;
-      max-width: 800px;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .dark-toggle:hover { background: var(--border); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      flex-direction: column;
+      gap: 0.25rem;
+      z-index: 999;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .mobile-menu a:hover { background: var(--bg-secondary); }
+
+    /* PAGE HEADER */
+    .page-header {
+      max-width: 700px;
       margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      text-align: center;
     }
 
-    .profile-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      border: 5px solid white;
-      margin-bottom: 2rem;
-    }
-
-    .contact-hero h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
+    .section-label {
+      font-size: 0.78rem;
       font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #007bff, #0056b3);
+    }
+
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 span {
+      background: linear-gradient(135deg, var(--accent), #6aa3ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .contact-hero p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-      margin-bottom: 3rem;
-      max-width: 600px;
+    .page-header p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* CONTACT GRID */
+    .contact-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
     }
 
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 0 2rem;
+      gap: 1.25rem;
     }
 
     .contact-card {
-      background: white;
-      padding: 3rem 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #007bff, #28a745, #ffc107, #6f42c1);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all 0.25s;
+      text-decoration: none;
     }
 
     .contact-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--shadow-strong);
+      border-color: var(--accent);
     }
 
-    .contact-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-      background: linear-gradient(135deg, #007bff, #0056b3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .contact-card-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .email-icon { color: #ea4335; }
-    .linkedin-icon { color: #0077b5; }
-    .github-icon { color: #333; }
-    .x-icon { color: #000000; }
+    .contact-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .icon-email { background: #fde8e8; color: #e53e3e; }
+    .icon-linkedin { background: #dbeafe; color: #0077b5; }
+    .icon-github { background: var(--bg-secondary); color: var(--text-primary); }
+    .icon-twitter { background: #e2e8f0; color: #1a1a1a; }
+
+    .dark .icon-github { background: #2a2a2a; color: var(--text-primary); }
+    .dark .icon-twitter { background: #2a2a2a; color: #e2e8f0; }
 
     .contact-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #222;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
     }
 
-    .contact-link {
-      font-size: 1.1rem;
-      color: #007bff;
-      text-decoration: none;
+    .contact-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .contact-link-text {
+      font-size: 0.85rem;
       font-weight: 600;
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      border: 2px solid #007bff;
-      border-radius: 50px;
-      transition: all 0.3s;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: auto;
     }
 
-    .contact-link:hover {
-      background: #007bff;
-      color: white;
-      transform: translateY(-2px);
+    /* AVAILABILITY BANNER */
+    .availability {
+      max-width: 800px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+    }
+
+    .availability-inner {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .avail-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.2);
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(34,197,94,0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0.1); }
+    }
+
+    .avail-text h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .avail-text p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
     }
 
     @media (max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        gap: 1rem;
-      }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
 
-      .contact-hero {
-        padding: 3rem 1rem;
-        min-height: 60vh;
-      }
-
-      .profile-img {
-        width: 140px;
-        height: 140px;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-      }
+      .page-header { padding: 4rem 1.5rem 2rem; }
+      .contact-section { padding: 1.5rem 1.5rem 4rem; }
+      .availability { padding: 0 1.5rem; }
+      .availability-inner { flex-direction: column; text-align: center; gap: 1rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+
   <nav>
-    <ul>
+    <a href="index.html" class="nav-logo">Jiddarh</a>
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="work.html">Work</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
+    <div class="nav-right">
+      <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">
+        <i class="fas fa-moon" id="darkIcon"></i>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <!-- Contact Hero -->
-  <section class="contact-hero">
-    <img src="jiddarh.jpg" alt="Hauwa Kudu Mohammed" class="profile-img">
-    <h1>Get In Touch</h1>
-    <p>Let's discuss your API docs, AI guides, or technical writing needs.</p>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="section-label">Contact</p>
+    <h1>Let's <span>work together</span></h1>
+    <p>Open to freelance projects, junior roles, and conversations about technical content marketing and API documentation.</p>
+  </div>
+
+  <!-- CONTACT CARDS -->
+  <section class="contact-section">
+    <div class="contact-grid">
+
+      <a href="mailto:jiddarh06@gmail.com" class="contact-card">
+        <div class="contact-card-top">
+          <div class="contact-icon-wrap icon-email">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Email</h3>
+        </div>
+        <p>Fastest way to discuss project requirements or opportunities.</p>
+        <span class="contact-link-text">Send a message <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/hauwa-kudu-mohammed" target="_blank" class="contact-card">
+        <div class="contact-card-top">
+          <div class="contact-icon-wrap icon-linkedin">
+            <i class="fab fa-linkedin-in"></i>
+          </div>
+          <h3>LinkedIn</h3>
+        </div>
+        <p>Connect for opportunities, collaborations, and professional discussions.</p>
+        <span class="contact-link-text">View profile <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="https://github.com/Jiddarh" target="_blank" class="contact-card">
+        <div class="contact-card-top">
+          <div class="contact-icon-wrap icon-github">
+            <i class="fab fa-github"></i>
+          </div>
+          <h3>GitHub</h3>
+        </div>
+        <p>Review my documentation samples, API projects, and portfolio work.</p>
+        <span class="contact-link-text">Visit GitHub <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="https://x.com/Jiddarh_06" target="_blank" class="contact-card">
+        <div class="contact-card-top">
+          <div class="contact-icon-wrap icon-twitter">
+            <i class="fab fa-x-twitter"></i>
+          </div>
+          <h3>X (Twitter)</h3>
+        </div>
+        <p>Follow for tech writing tips and API documentation updates.</p>
+        <span class="contact-link-text">Follow <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+    </div>
   </section>
 
-  <!-- Contact Cards -->
-  <div class="contact-grid">
-    <div class="contact-card">
-      <i class="fas fa-envelope contact-icon email-icon"></i>
-      <h3>Email Me</h3>
-      <p>Fastest way to discuss your project requirements</p>
-      <a href="mailto:hauwakudum.06@gmail.com" class="contact-link">Send Message</a>
-    </div>
-
-    <div class="contact-card">
-      <i class="fab fa-linkedin contact-icon linkedin-icon"></i>
-      <h3>LinkedIn</h3>
-      <p>Connect for opportunities and technical discussions</p>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">View Profile</a>
-    </div>
-
-    <div class="contact-card">
-      <i class="fab fa-github contact-icon github-icon"></i>
-      <h3>GitHub</h3>
-      <p>Review my documentation samples and projects</p>
-      <a href="https://github.com/Jiddarh" target="_blank" class="contact-link">Visit GitHub</a>
-    </div>
-
-    <div class="contact-card">
-      <i class="fab fa-x-twitter contact-icon x-icon"></i>
-      <h3>X (Twitter)</h3>
-      <p>Follow for tech writing tips and API documentation updates</p>
-      <a href="https://x.com/Jiddarh_06" target="_blank" class="contact-link">Follow on X</a>
+  <!-- AVAILABILITY -->
+  <div class="availability">
+    <div class="availability-inner">
+      <div class="avail-dot"></div>
+      <div class="avail-text">
+        <h4>Currently available</h4>
+        <p>Open to junior technical content marketing roles, API documentation contracts, and freelance projects — remote preferred.</p>
+      </div>
     </div>
   </div>
+
+  <footer>
+    <p>© 2025 Hauwa Kudu Mohammed · Built with purpose</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('darkToggle');
+    const icon = document.getElementById('darkIcon');
+    const html = document.documentElement;
+
+    function setDark(on) {
+      html.classList.toggle('dark', on);
+      icon.className = on ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', on ? 'dark' : 'light');
+    }
+
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') setDark(true);
+
+    toggle.addEventListener('click', () => setDark(!html.classList.contains('dark')));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  </script>
 </body>
-    </html>
+  </html>
+  
